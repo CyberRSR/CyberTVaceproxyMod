@@ -1,4 +1,4 @@
-AceProxy: Ace Stream HTTP Proxy
+CyberTVaceproxyMod: Ace Stream HTTP Proxy Mode for CyberTV
 ===============================
 AceProxy allows you to watch [Ace Stream](http://acestream.org/) live streams or BitTorrent files over HTTP.
 It's written in Python + gevent and should work on both Linux and Windows (Mac OS should work too, but was not tested)
