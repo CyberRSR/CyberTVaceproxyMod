@@ -116,7 +116,7 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             cybertv_url = 'http://' + AceConfig.CyberTV_globalIP + ':' + str(AceConfig.vlcoutport) + '/' + self.vlcid
             logger.debug("CyberTV: url = " + cybertv_url)
             try:
-                cybertv_addch_url = AceConfig.cybertv_add_ch + AceConfig.md5pass + '&ch_name=' + AceConfig.ch_name + '&ch_url=' + cybertv_url + '&active=' + '0'
+                cybertv_addch_url = AceConfig.cybertv_add_ch + AceConfig.md5pass + '&ch_name=' + self.vlcid + '&ch_url=' + cybertv_url + '&active=' + '0'
                 cybertv_add_rez = urllib2.urlopen(cybertv_addch_url, timeout=10).read()
                 logger.debug("CyberTV: loaded add_ch close")
             except:
