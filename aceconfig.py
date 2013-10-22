@@ -12,7 +12,7 @@ class AceConfig(object):
     # Ace Stream Engine host
     acehost = '127.0.0.1'
     # Ace Stream Engine port (autodetect for Windows)
-    aceport = 53053
+    aceport = 62062
     # Ace Stream age parameter (LT_13, 13_17, 18_24, 25_34, 35_44, 45_54,
     # 55_64, GT_65)
     aceage = AceConst.AGE_18_24
@@ -74,9 +74,7 @@ class AceConfig(object):
     #Set your IP or domain name
     CyberTV_globalIP = 'cybertvserv1.no-ip.org'
     #Set your md5pass
-    md5pass = '8d57ad75dc890e1b265e23defa9a5547'
-    #Set temp chanel name
-    ch_name = 'cybertvserv1'
+    md5pass = '8d57ad75dc890e1b265e23defa9a5547'    
     #Cybertv add_ch 
     cybertv_add_ch = 'http://tv.cybertv.zz.mu/add_ch_get.php?md5pass='
     #'&ch_name=' '&ch_url=' '&active='
