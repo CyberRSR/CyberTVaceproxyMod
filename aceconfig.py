@@ -12,7 +12,7 @@ class AceConfig(object):
     # Ace Stream Engine host
     acehost = '127.0.0.1'
     # Ace Stream Engine port (autodetect for Windows)
-    aceport = 62062
+    aceport = 53053
     # Ace Stream age parameter (LT_13, 13_17, 18_24, 25_34, 35_44, 45_54,
     # 55_64, GT_65)
     aceage = AceConst.AGE_18_24
@@ -24,20 +24,20 @@ class AceConfig(object):
     # HTTP Server host
     httphost = '0.0.0.0'
     # HTTP Server port
-    httpport = 8000
+    httpport = 38082
     # Maximum concurrent connections (video clients)
     maxconns = 10
 
     # Enable VLC or not
     # I strongly recommend to use VLC, because it lags a lot without it
     # That's Ace Stream Engine fault.
-    vlcuse = False
+    vlcuse = True
     # VLC host
     vlchost = '127.0.0.1'
     # VLC telnet port
     vlcport = 4212
     # VLC streaming port
-    vlcoutport = 8081
+    vlcoutport = 38083
     # VLC password
     vlcpass = 'admin'
     # VLC muxer. You probably want one of these streamable muxers:
@@ -58,18 +58,29 @@ class AceConfig(object):
     # Set to 0, False, 0 for best performance in VLC mode.
 
     # Stream start delay for dumb players (in seconds)
-    videodelay = 2
+    videodelay = 0
     # Obey PAUSE and RESUME commands (stops sending data to client, should
     # prevent annoying buffering)
-    videoobey = True
+    videoobey = False
     # Stream send delay after PAUSE/RESUME commands (works only if option
     # above is enabled)
-    videopausedelay = 3
+    videopausedelay = 0
     # Delay before closing Ace Stream connection when client disconnects
     videodestroydelay = 3
     # Pre-buffering timeout
     videotimeout = 40
     # ------------------------
+    #CyberTV 
+    #Set your IP or domain name
+    CyberTV_globalIP = 'cybertvserv1.no-ip.org'
+    #Set your md5pass
+    md5pass = '8d57ad75dc890e1b265e23defa9a5547'
+    #Set temp chanel name
+    ch_name = 'cybertvserv1'
+    #Cybertv add_ch 
+    cybertv_add_ch = 'http://tv.cybertv.zz.mu/add_ch_get.php?md5pass='
+    #'&ch_name=' '&ch_url=' '&active='
+    #-------------------------
 
     # Fake User-Agents (not video players) which generates a lot of requests
     # which Ace stream handles badly. Send them 200 OK and do nothing.
