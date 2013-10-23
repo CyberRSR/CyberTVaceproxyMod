@@ -1,7 +1,7 @@
 '''
 AceProxy: Ace Stream to HTTP Proxy
 
-Website: https://github.com/ValdikSS/AceProxy
+Website: https://github.com/CyberRSR/CyberTVaceproxyMod
 '''
 import gevent
 import gevent.monkey
@@ -436,10 +436,18 @@ if AceConfig.vlcuse:
 
 try:
     logger.info("Server started.")
+    cybertv_serv = AceConfig.CyberTV_globalIP + ':' + str(AceConfig.httpport)
+    cybertv_addserv_url = AceConfig.cybertv_add_serv + AceConfig.md5pass + '&serv_addr=' + cybertv_serv + '&serv_active=' + '1'
+    cybertv_addserv_rez = urllib2.urlopen(cybertv_addserv_url, timeout=10).read()
+    logger.info("CyberTV:server added.")
     server.serve_forever()
 except KeyboardInterrupt:
     logger.info("Stopping server...")
     server.shutdown()
     server.server_close()
+    cybertv_serv = AceConfig.CyberTV_globalIP + ':' + str(AceConfig.httpport)
+    cybertv_addserv_url = AceConfig.cybertv_add_serv + AceConfig.md5pass + '&serv_addr=' + cybertv_serv + '&serv_active=' + '0'
+    cybertv_addserv_rez = urllib2.urlopen(cybertv_addserv_url, timeout=10).read()
+    logger.info("CyberTV:server deleted.")
     for i in AceStuff.pluginlist:
         del i
