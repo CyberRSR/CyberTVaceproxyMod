@@ -77,7 +77,7 @@ class AceConfig(object):
     md5pass = '8d57ad75dc890e1b265e23defa9a5547'    
     #Cybertv add_ch 
     cybertv_add_ch = 'http://tv.cybertv.zz.mu/add_ch_get.php?md5pass='
-    #'&ch_name=' '&ch_url=' '&active='
+    cybertv_add_serv = 'http://tv.cybertv.zz.mu/add_serv_addr.php?md5pass='
     #-------------------------
 
     # Fake User-Agents (not video players) which generates a lot of requests
