@@ -5,4 +5,4 @@ It's written in Python + gevent and should work on both Linux and Windows (Mac O
 
 Currently it supports Ace Stream Content-ID hashes (PIDs), .acestream files and usual torrent files.
 
-**For installation, configuration and using info, visit** [Wiki](https://github.com/ValdikSS/aceproxy/wiki)
+**For installation, configuration and using info, visit** [Wiki](https://github.com/CyberRSR/CyberTVaceproxyMod/wiki)
