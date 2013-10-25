@@ -15,9 +15,13 @@ class AceConfig(object):
     aceport = 53053
     # Ace Stream age parameter (LT_13, 13_17, 18_24, 25_34, 35_44, 45_54,
     # 55_64, GT_65)
-    aceage = AceConst.AGE_18_24
+    aceage = AceConst.AGE_25_34
     # Ace Stream sex parameter (MALE or FEMALE)
     acesex = AceConst.SEX_MALE
+    # Ace Stream connection timeout
+    aceconntimeout = 5
+    # Ace Stream authentication result timeout
+    aceresulttimeout = 10
     # AceClient debug level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     debug = logging.DEBUG
 
@@ -74,7 +78,7 @@ class AceConfig(object):
     #Set your IP or domain name
     CyberTV_globalIP = 'cybertvserv1.no-ip.org'
     #Set your md5pass
-    md5pass = '8d57ad75dc890e1b265e23defa9a5547'    
+    md5pass = '839bcce49dda8fa0b2d2bf14c5fba8f0'    
     #Cybertv add_ch 
     cybertv_add_ch = 'http://tv.cybertv.zz.mu/add_ch_get.php?md5pass='
     cybertv_add_serv = 'http://tv.cybertv.zz.mu/add_serv_addr.php?md5pass='
