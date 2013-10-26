@@ -242,8 +242,7 @@ class AceClient(object):
                     # NOTREADY
                     logger.error("Ace is not ready. Wrong auth?")
                     self._auth = False
-                    self._authevent.set()
-                    
+                    self._authevent.set()                    
 
                 elif self._recvbuffer.startswith(AceMessage.response.START):
                     # START
@@ -256,7 +255,7 @@ class AceClient(object):
 						
                 elif self._recvbuffer.startswith(AceMessage.response.LOADRESP):
                     # LOADASYNC
-                    self._pidinfo = self._recvbuffer.split()[5]
+                    self._pidinfo = self._recvbuffer.split()[5].split('"')[1]
                     logger.debug('pidinfo = ' + self._pidinfo)					
                     
                 elif self._recvbuffer.startswith(AceMessage.response.STOP):
