@@ -228,9 +228,7 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         if shouldcreateace:
         # If we are the only client, create AceClient
             try:
-                self.ace = aceclient.AceClient(
-                    AceConfig.acehost, AceConfig.aceport, connect_timeout=AceConfig.aceconntimeout,
-                    result_timeout=AceConfig.aceresulttimeout, debug=AceConfig.debug)
+                self.ace = aceclient.AceClient(AceConfig.acehost, AceConfig.aceport, connect_timeout=AceConfig.aceconntimeout, result_timeout=AceConfig.aceresulttimeout, debug=AceConfig.debug)
                 # Adding AceClient instance to pool
                 AceStuff.clientcounter.addAce(self.path_unquoted, self.ace)
                 logger.debug("AceClient created")
@@ -262,15 +260,16 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                     gender=AceConfig.acesex, age=AceConfig.aceage,
                     product_key=AceConfig.acekey, pause_delay=AceConfig.videopausedelay)
                 logger.debug("AceClient inited")
+                
                 if self.reqtype == 'pid':					
                     self.ace.START(
                         self.reqtype, {'content_id': self.path_unquoted, 'file_indexes': self.params[0]})
                 elif self.reqtype == 'torrent':
                     self.paramsdict = dict(
                         zip(aceclient.acemessages.AceConst.START_TORRENT, self.params))
-                    self.paramsdict['url'] = self.path_unquoted
+                    self.paramsdict['url'] = self.path_unquoted                    
                     self.ace.START(self.reqtype, self.paramsdict)
-                logger.debug("START done")
+                logger.debug("START done")                
 
             # Getting URL
             self.url = self.ace.getUrl(AceConfig.videotimeout)
@@ -278,6 +277,7 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
             if shouldcreateace:
                 logger.debug("Got url " + self.url)
+                
                 # If using VLC, add this url to VLC
                 if AceConfig.vlcuse:
                     # Force ffmpeg demuxing if set in config
@@ -301,15 +301,23 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
                     ':' + str(AceConfig.vlcoutport) + '/' + self.vlcid
                 logger.debug("VLC url " + self.url)
 				
-            #Buld CyberTV url
+            #Buld CyberTV url     
+            ginfourl = self.path_unquoted			
+            if self.reqtype == 'pid':
+                self.ace.LOADASYNC('pid', self.vlcid) 
+            elif self.reqtype == 'torrent':
+                self.ace.LOADASYNC('torrent', ginfourl)
+				
             cybertv_url = 'http://' + AceConfig.CyberTV_globalIP + ':' + str(AceConfig.vlcoutport) + '/' + self.vlcid
             logger.debug("CyberTV: url = " + cybertv_url)
+            gevent.sleep(0.5)
+            pidinfo = str(self.ace.getLOADRESP())
             try:
-                cybertv_addch_url = AceConfig.cybertv_add_ch + AceConfig.md5pass + '&ch_name=' + self.vlcid + '&ch_url=' + cybertv_url + '&active=' + '1'
+                cybertv_addch_url = AceConfig.cybertv_add_ch + AceConfig.md5pass + '&ch_name=' + pidinfo + '&ch_url=' + cybertv_url + '&active=' + '1'
                 cybertv_add_rez = urllib2.urlopen(cybertv_addch_url, timeout=10).read()
-                logger.debug("CyberTV: loaded add_ch")
+                logger.debug('CyberTV: loaded add_ch: ' + pidinfo)
             except:
-                logger.debug("CyberTV: ERROR load add_ch")
+                logger.debug("CyberTV: ERROR load add_ch: " + pidinfo)
 
 			# Sending client headers to videostream
             self.video = urllib2.Request(self.url)
