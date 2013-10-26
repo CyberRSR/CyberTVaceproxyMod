@@ -233,8 +233,7 @@ class AceClient(object):
                                 repr(e))
                             self._auth = False
                             self._authevent.set()
-                            # Terminate _recvData
-                            return
+                            
                         self._request_key = None
                     else:
                         self._write(AceMessage.request.READY_nokey)
@@ -244,7 +243,7 @@ class AceClient(object):
                     logger.error("Ace is not ready. Wrong auth?")
                     self._auth = False
                     self._authevent.set()
-                    return
+                    
 
                 elif self._recvbuffer.startswith(AceMessage.response.START):
                     # START
