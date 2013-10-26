@@ -46,6 +46,8 @@ class AceClient(object):
         self._urlresult = AsyncResult()
         # Event for resuming from PAUSE
         self._resumeevent = Event()
+        #PID video info
+        self._pidinfo = None
 
         # Logger
         logger = logging.getLogger('AceClient_init')
@@ -146,6 +148,38 @@ class AceClient(object):
             logger.error(errmsg)
             raise AceException(errmsg)
 
+    def LOADASYNC(self, zreqtype, vpid):
+        '''
+        Get video info
+        '''
+        
+        # Logger
+        logger = logging.getLogger("AceClient_LOADASYNC")
+		
+        if zreqtype == 'pid':
+            tmess = AceMessage.request.LOADASYNC('PID', '123456', {'content_id': vpid})
+        elif zreqtype == 'torrent':
+            tmess = AceMessage.request.LOADASYNC('TORRENT', '123456', {'url': vpid})
+		
+        self._write(tmess) 
+        logger.debug('mess = ' + tmess)
+
+        try:
+            if not self._result.get(timeout=self._resulttimeout):
+                errmsg = "LOADASYNC error!"
+                logger.error(errmsg)
+                raise AceException(errmsg)
+        except gevent.Timeout:
+            errmsg = "LOADASYNC timeout!"
+            logger.error(errmsg)
+            raise AceException(errmsg)
+			
+    def getLOADRESP(self):
+        '''
+        Get LOADRESP string
+        '''
+        return self._pidinfo
+        
     def getUrl(self, timeout=40):
         # Logger
         logger = logging.getLogger("AceClient_getURL")
@@ -220,7 +254,12 @@ class AceClient(object):
                         self._resumeevent.set()
                     except IndexError as e:
                         self._url = None
-
+						
+                elif self._recvbuffer.startswith(AceMessage.response.LOADRESP):
+                    # LOADASYNC
+                    self._pidinfo = self._recvbuffer.split()[5]
+                    logger.debug('pidinfo = ' + self._pidinfo)					
+                    
                 elif self._recvbuffer.startswith(AceMessage.response.STOP):
                     pass
 
