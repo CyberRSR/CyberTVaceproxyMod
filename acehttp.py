@@ -144,6 +144,8 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         self.requestgreenlet = gevent.getcurrent()
         # Connected client IP address
         self.clientip = self.request.getpeername()[0]
+		
+        logger.info("Accepted connection from " + self.clientip + " path " + self.path)
 
         try:
             self.splittedpath = self.path.split('/')
