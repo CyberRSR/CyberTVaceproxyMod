@@ -76,9 +76,9 @@ class AceConfig(object):
     # ------------------------
     #CyberTV 
     #Set your IP or domain name
-    CyberTV_globalIP = 'cybertvserv1.no-ip.org'
+    CyberTV_globalIP = ''
     #Set your md5pass
-    md5pass = '8d57ad75dc890e1b265e23defa9a5547'    
+    md5pass = ''    
     #Cybertv add_ch 
     cybertv_add_ch = 'http://tv.cybertv.zz.mu/add_ch_get.php?md5pass='
     cybertv_add_serv = 'http://tv.cybertv.zz.mu/add_serv_addr.php?md5pass='
