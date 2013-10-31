@@ -60,7 +60,7 @@ class Raketatv(AceProxyPlugin):
                 return
 
         if Raketatv.host:
-            hostport = Raketatv.host + ':' + str(connection.request.getsockname()[1])
+            hostport = Raketatv.host
         else:
             hostport = connection.request.getsockname()[0] + ':' + str(connection.request.getsockname()[1])
 
