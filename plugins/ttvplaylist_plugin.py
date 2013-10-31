@@ -43,7 +43,7 @@ class Ttvplaylist(AceProxyPlugin):
                 return
 
         if Ttvplaylist.host:
-            hostport = Ttvplaylist.host + ':' + str(connection.request.getsockname()[1])
+            hostport = Ttvplaylist.host
         else:
             hostport = connection.request.getsockname()[0] + ':' + str(connection.request.getsockname()[1])
 
