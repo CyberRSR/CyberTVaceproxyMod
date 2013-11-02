@@ -134,6 +134,7 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         '''
         GET request handler
         '''
+        print self.headers
         logger = logging.getLogger('http_HTTPHandler')
         self.clientconnected = True
         # Don't wait videodestroydelay if error happened
@@ -449,8 +450,12 @@ try:
     logger.info("Server started.")
     cybertv_serv = AceConfig.CyberTV_globalIP + ':' + str(AceConfig.httpport)
     cybertv_addserv_url = AceConfig.cybertv_add_serv + AceConfig.md5pass + '&serv_addr=' + cybertv_serv + '&serv_active=' + '1'
-    cybertv_addserv_rez = urllib2.urlopen(cybertv_addserv_url, timeout=10).read()
-    logger.info("CyberTV:server added.")
+    try:
+        cybertv_addserv_rez = urllib2.urlopen(cybertv_addserv_url, timeout=10).read()
+        logger.info("CyberTV:server added.")
+    except:
+        logger.debug("CyberTV: server ERROR")
+
     server.serve_forever()
 except KeyboardInterrupt:
     logger.info("Stopping server...")
@@ -458,7 +463,11 @@ except KeyboardInterrupt:
     server.server_close()
     cybertv_serv = AceConfig.CyberTV_globalIP + ':' + str(AceConfig.httpport)
     cybertv_addserv_url = AceConfig.cybertv_add_serv + AceConfig.md5pass + '&serv_addr=' + cybertv_serv + '&serv_active=' + '0'
-    cybertv_addserv_rez = urllib2.urlopen(cybertv_addserv_url, timeout=10).read()
-    logger.info("CyberTV:server deleted.")
+    try:
+        cybertv_addserv_rez = urllib2.urlopen(cybertv_addserv_url, timeout=10).read()
+        logger.info("CyberTV:server deleted.")
+    except:
+        logger.debug("CyberTV: server ERROR")		
+   
     for i in AceStuff.pluginlist:
         del i
