@@ -314,9 +314,11 @@ class HTTPHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             cybertv_url = 'http://' + AceConfig.CyberTV_globalIP + ':' + str(AceConfig.vlcoutport) + '/' + self.vlcid
             logger.debug("CyberTV: url = " + cybertv_url)
             gevent.sleep(0.5)
-            pidinfo = str(self.ace.getLOADRESP())
+            pidinfoa = str(self.ace.getLOADRESP())
+            pidinfo = urllib.unquote((self.ace.getLOADRESP()).encode('utf-8')).decode('utf-8');
+
             try:
-                cybertv_addch_url = AceConfig.cybertv_add_ch + AceConfig.md5pass + '&ch_name=' + pidinfo + '&ch_url=' + cybertv_url + '&active=' + '1'
+                cybertv_addch_url = AceConfig.cybertv_add_ch + AceConfig.md5pass + '&ch_name=' + pidinfoa + '&ch_url=' + cybertv_url + '&active=' + '1'
                 cybertv_add_rez = urllib2.urlopen(cybertv_addch_url, timeout=10).read()
                 logger.debug('CyberTV: loaded add_ch: ' + pidinfo)
             except:
