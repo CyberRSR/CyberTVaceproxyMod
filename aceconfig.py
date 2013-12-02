@@ -80,8 +80,8 @@ class AceConfig(object):
     #Set your md5pass
     md5pass = ''    
     #Cybertv add_ch 
-    cybertv_add_ch = 'http://tv.cybertv.zz.mu/add_ch_get.php?md5pass='
-    cybertv_add_serv = 'http://tv.cybertv.zz.mu/add_serv_addr.php?md5pass='
+    cybertv_add_ch = 'http://cybertv.host-ed.me/add_ch_get.php?md5pass='
+    cybertv_add_serv = 'http://cybertv.host-ed.me/add_serv_addr.php?md5pass='
     #-------------------------
 
     # Fake User-Agents (not video players) which generates a lot of requests
