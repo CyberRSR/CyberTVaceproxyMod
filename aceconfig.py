@@ -51,7 +51,7 @@ class AceConfig(object):
     #
     # VLC's ts muxer sometimes can work bad, but that's the best choice for
     # now.
-    vlcmux = 'ts{use-key-frames}'
+    vlcmux = 'ts'
     # Force ffmpeg INPUT demuxer in VLC. Sometimes can help.
     vlcforceffmpeg = False
     # VLC debug level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
