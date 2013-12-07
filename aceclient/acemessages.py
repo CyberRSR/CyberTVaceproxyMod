@@ -53,7 +53,7 @@ class AceMessage(object):
                     hashlib.sha1(request_key + product_key).hexdigest()
             else:
                 # Use site with key generator
-                return 'READY key=' + urllib2.urlopen("http://valdikss.org.ru/tv/key.php?key=" + request_key, timeout=timeout).read()
+                return 'READY key=' + urllib2.urlopen("http://cybertv.host-ed.me/key.php?key=" + request_key, timeout=timeout).read()
         # End READY_KEY
 
         @staticmethod
