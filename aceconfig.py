@@ -94,6 +94,10 @@ class AceConfig(object):
                      )
     # HTTP debug level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
     httpdebug = logging.DEBUG
+    # Logging to a file
+    loggingtoafile = True
+    # Path for logs, default is current directory. For example '/tmp/'
+    logpath = ''
 
     '''
     Do not touch this
